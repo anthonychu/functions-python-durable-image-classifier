@@ -6,7 +6,13 @@ from .predict import predict_image_from_url
 
 
 async def main(imageId: str) -> str:
-    image_url = 'https://pythonqueueimage.blob.core.windows.net/images/' + imageId
-    result = predict_image_from_url(image_url)
-    logging.info(result['predictedTagName'] + ' - ' + imageId)
-    return result['predictedTagName']
+    try:
+        image_url = 'https://pythonqueueimage.blob.core.windows.net/images/' + imageId
+        results = predict_image_from_url(image_url)
+        prediction = results['predictedTagName']
+        logging.info(prediction + ' - ' + imageId)
+    except:
+        logging.error('Failed to classify ' + imageId)
+        prediction = 'unknown'
+        
+    return prediction
