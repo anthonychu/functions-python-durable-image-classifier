@@ -2,9 +2,16 @@
   "scriptFile": "__init__.py",
   "bindings": [
     {
-      "name": "imageId",
+      "name": "inputJson",
       "type": "activityTrigger",
       "direction": "in"
+    },
+    {
+      "type": "signalR",
+      "direction": "out",
+      "name": "signalr",
+      "hubName": "durableimages",
+      "connectionStringSetting": "AzureSignalRConnectionString"
     }
   ]
 }

@@ -5,8 +5,14 @@ import azure.durable_functions as df
 
 
 async def main(req: func.HttpRequest, starter: str) -> func.HttpResponse:
+    user_id = req.params['userid']
+    
     client = df.DurableOrchestrationClient(starter)
-    instance_id = await client.start_new('PetClassificationOrchestrator', None, int(req.route_params["count"]))
+    orchestration_input = {
+        'user_id': user_id,
+        'image_count': int(req.route_params["count"])
+    }
+    instance_id = await client.start_new('PetClassificationOrchestrator', None, orchestration_input)
 
     logging.info(f"Started orchestration with ID = '{instance_id}'.")
 
