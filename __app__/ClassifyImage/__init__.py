@@ -13,6 +13,7 @@ async def main(inputJson: str, signalr: func.Out[str]) -> str:
         request = json.loads(inputJson)
         image_id = request['image_id']
         image_url = environ['ImagesBaseUrl'] + image_id
+        user_id = request['user_id']
 
         results = predict_image_from_url(image_url)
         prediction = results['predictedTagName']
@@ -23,6 +24,7 @@ async def main(inputJson: str, signalr: func.Out[str]) -> str:
     
     signalr_message = {
         'target': 'newImageResult',
+        'userId': user_id,
         'arguments': [{
             'imageUrl': image_url,
             'prediction': prediction
