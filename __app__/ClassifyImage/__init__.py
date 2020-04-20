@@ -1,6 +1,7 @@
 from asyncio import sleep
 import json
 import logging
+from os import environ
 from random import choice
 
 import azure.functions as func
@@ -11,7 +12,7 @@ async def main(inputJson: str, signalr: func.Out[str]) -> str:
     try:
         request = json.loads(inputJson)
         image_id = request['image_id']
-        image_url = 'https://pythonqueueimage.blob.core.windows.net/images/' + image_id
+        image_url = environ['ImagesBaseUrl'] + image_id
 
         results = predict_image_from_url(image_url)
         prediction = results['predictedTagName']
