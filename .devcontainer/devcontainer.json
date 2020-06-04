@@ -4,7 +4,8 @@
 	"forwardPorts": [ 7071 ],
 
 	"settings":  {
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"extensions.autoUpdate": false
 	},
 
 	"extensions": [
