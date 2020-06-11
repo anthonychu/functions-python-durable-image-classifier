@@ -8,9 +8,8 @@ import azure.functions as func
 from .predict import predict_image_from_url
 
 
-async def main(inputJson: str, signalr: func.Out[str]) -> str:
+async def main(request: dict, signalr: func.Out[str]) -> str:
     try:
-        request = json.loads(inputJson)
         image_id = request['image_id']
         image_url = environ['ImagesBaseUrl'] + image_id
         user_id = request['user_id']
