@@ -1,3 +1,4 @@
+
 <html lang="en">
 
 <head>
@@ -68,10 +69,13 @@
 
       <div class="row" v-if="working" style="margin-bottom: 20px;">
         <div class="col">
-          <div class="progress">
+          <div class="progress" v-if="resultsReceived">
             <div class="progress-bar" role="progressbar" 
               v-bind:style="{ width: `${percentComplete}%` }" aria-valuenow="{{ percentComplete }}" 
               aria-valuemin="0" aria-valuemax="100">{{ resultsReceived }}</div>
+          </div>
+          <div class="progress" v-if="!resultsReceived">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
           </div>
         </div>
       </div>
@@ -97,8 +101,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.12/Rx.min.js" integrity="sha256-cwLuyVzYZFWhnQzXHj8mufd8tyxMZo1Pso0QNA5cqlI=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/uuid@7.0.3/dist/umd/uuidv4.min.js"></script>
   <script>
-    const apiBaseUrl = 'http://localhost:7071'
-    const functionKey = ''
+    const apiBaseUrl = 'https://durable-image-classifier.azurewebsites.net/'
+    const functionKey = 'd3UKPkTe50cUn4SGPdGIM3BGXqj0CxgiBf7V4epa87V24FKXljnFRw=='
     const sessionId = uuidv4()
 
     const app = new Vue({
